@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
       - name: auth-microservice-c
-        image: tonyq2k3/auth-microservice:release
+        image: tonyq2k3/auth-microservice:test-e3a75dc9fef74b6dc69567a073e6bd0e9bb512e8
         env:
           - name: PORT
             value: "8003"
