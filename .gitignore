@@ -1,1 +1,3 @@
 datadog/COMMAND.md
+terraform/**/.terraform*
+terraform/**/terraform*
