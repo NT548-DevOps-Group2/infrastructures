@@ -38,4 +38,4 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform plan -var='access_key=$ACCESS_KEY' -var='secret_key=$SECRET_KEY' -var=" -var='token=$TOKEN'
+        run: terraform plan -var='access_key=$ACCESS_KEY' -var='secret_key=$SECRET_KEY' -var='token=$TOKEN'
