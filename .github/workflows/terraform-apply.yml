@@ -11,9 +11,14 @@ on:
           - production
           - all
 
+env:
+  access_key: ${{ secrets.AWS_ACCESS_KEY }}
+  secret_key: ${{ secrets.AWS_SECRET_KEY }}
+  token: ${{ secrets.AWS_TOKEN }}
 
 jobs:
   terraform-apply:
+    name: Terraform Setup and Apply
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -33,4 +38,4 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform plan -var="access_key=${{ secrets.AWS_ACCESS_KEY }}" -var="secret_key=${{ secrets.AWS_SECRET_KEY }}" -var=" -var="token=${{ secrets.AWS_TOKEN }}"
+        run: terraform plan -var='access_key=\${{ env.access_key }}' -var='secret_key=${{ env.secret_key }}' -var=" -var='token=${{ secrets.AWS_TOKEN }}'
