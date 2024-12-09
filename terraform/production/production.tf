@@ -9,7 +9,10 @@ terraform {
 # Configure the AWS Provider
 provider "aws" {
   region = "us-east-1"
-  shared_credentials_files = [ var.credentials_file ]
+  # shared_credentials_files = [ var.credentials_file ]
+  access_key = var.access_key
+  secret_key = var.secret_key
+  token = var.token
 }
 
 locals {

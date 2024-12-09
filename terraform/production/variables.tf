@@ -1,17 +1,17 @@
-# variable "access_key" {
-#   description = "AWS Access Key"
-#   type = string
-# }
+variable "access_key" {
+  description = "AWS Access Key"
+  type = string
+}
 
-# variable "secret_key" {
-#   description = "value"
-#   type = string
-# }
+variable "secret_key" {
+  description = "AWS Secret Key"
+  type = string
+}
 
-# variable "token" {
-#   description = "value"
-#   type = string
-# }
+variable "token" {
+  description = "AWS Token"
+  type = string
+}
 
 variable "credentials_file" {
   description = "value"
