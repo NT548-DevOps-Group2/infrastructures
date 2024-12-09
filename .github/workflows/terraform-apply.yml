@@ -1,4 +1,4 @@
-name: Terraform Apply
+name: Terraform Provisioning
 
 on: 
   workflow_dispatch:
@@ -33,4 +33,4 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform plan -input=false
+        run: terraform plan -var="access_key=${{ secrets.AWS_ACCESS_KEY }}" -var="secret_key=${{ secrets.AWS_SECRET_KEY }}" -var=" -var="token=${{ secrets.AWS_TOKEN }}"
