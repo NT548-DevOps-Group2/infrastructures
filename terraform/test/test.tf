@@ -1,5 +1,3 @@
-# Setup test environment cluster
-
 terraform {
   required_providers {
     aws = {
@@ -8,17 +6,20 @@ terraform {
     }
   }
 }
-
+# Configure the AWS Provider
 provider "aws" {
   region = "us-east-1"
+  access_key = var.access_key
+  secret_key = var.secret_key
+  token = var.token
 }
 
 locals {
   cluster_name = "test-environment"
   node_group_name = "test-nodes"
-  vpc_id = "vpc-03312ce83615cf80a"
-  subnet_ids = ["subnet-0930513f1b4fe91fc", "subnet-02732b19faaaf68e2"]
-  iam_role_arn = "arn:aws:iam::624899937274:role/LabRole"
+  vpc_id = var.vpc_id
+  subnet_ids = ["subnet-0e3cf1fc681142409", "subnet-081bb7ff75ffd8a3c", "subnet-08ba4a9cc665e9db3"]
+  iam_role_arn = var.iam_role_arn
 }
 
 # EKS Cluster provisioning
@@ -31,14 +32,6 @@ resource "aws_eks_cluster" "test_cluster" {
   }
 
   version = "1.29" 
-}
-
-output "endpoint" {
-  value = aws_eks_cluster.test_cluster.endpoint
-}
-
-output "kubeconfig-certificate-authority-data" {
-  value = aws_eks_cluster.test_cluster.certificate_authority[0].data
 }
 
 # EKS Node Group

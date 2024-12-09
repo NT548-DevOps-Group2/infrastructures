@@ -4,12 +4,12 @@ variable "access_key" {
 }
 
 variable "secret_key" {
-  description = "value"
+  description = "AWS Secret Key"
   type = string
 }
 
 variable "token" {
-  description = "value"
+  description = "AWS Token"
   type = string
 }
 
