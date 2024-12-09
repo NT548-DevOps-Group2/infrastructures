@@ -19,10 +19,6 @@ jobs:
     defaults:
       run:
         working-directory: terraform/${{ github.event.inputs.environment }}
-    env:
-      ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-      SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
-      TOKEN: ${{ secrets.AWS_TOKEN }}
     permissions:
       pull-requests: read
     steps:
@@ -38,4 +34,4 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform plan -var='access_key=$ACCESS_KEY' -var='secret_key=$SECRET_KEY' -var='token=$TOKEN'
+        run: terraform plan -var="access_key=${{ secrets.AWS_ACCESS_KEY }}" -var="secret_key=${{ secrets.AWS_SECRET_KEY }}" -var="token=${{ secrets.AWS_TOKEN }}"
