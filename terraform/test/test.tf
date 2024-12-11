@@ -60,7 +60,7 @@ resource "aws_eks_addon" "coredns" {
   cluster_name = local.cluster_name
   addon_name = "coredns"
   addon_version = "v1.11.1-eksbuild.4"
-  depends_on = [ aws_eks_cluster.test_cluster, aws_eks_node_group.my_node_group ]
+  depends_on = [ aws_eks_cluster.test_cluster, aws_eks_node_group.test_node_group ]
 }
 
 resource "aws_eks_addon" "kube-proxy" {
