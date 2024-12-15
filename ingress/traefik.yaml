@@ -1,0 +1,64 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: traefik
+  namespace: ingress
+  labels:
+    app: traefik
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traefik
+  template:
+    metadata:
+      labels:
+        app: traefik
+    spec:
+      serviceAccountName: traefik-ingress-controller
+      containers:
+        - name: traefik
+          image: traefik:v3.2
+          args:
+            - --log.level=DEBUG
+            - --api.insecure
+            - --providers.kubernetescrd
+            - --entryPoints.app.address=:80
+            - --entryPoints.websecure.address=:443
+            - --entryPoints.argo.address=:4434
+          ports:
+            - name: app
+              containerPort: 80
+            - name: argo
+              containerPort: 4434
+            - name: dashboard
+              containerPort: 8080
+            - name: websecure
+              containerPort: 443
+
+---
+# <Traefik LB External IP>:8080 for the dashboard
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik
+  namespace: ingress
+spec:
+  type: LoadBalancer
+  selector:
+    app: traefik
+  ports:
+    - name: app
+      port: 80
+      targetPort: app
+    - name: argo
+      port: 4434
+      targetPort: argo
+    - name: dashboard
+      port: 8080
+      targetPort: dashboard
+    - name: websecure
+      port: 443
+      targetPort: dashboar
+

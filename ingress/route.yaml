@@ -1,0 +1,40 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: app-route
+  namespace: app
+spec:
+  entryPoints:
+    - app
+  routes:
+  - kind: Rule
+    match: PathPrefix(`/`)
+    services:
+    - kind: Service
+      name: nginx-service
+      namespace: app
+      port: 80
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argocd-server
+  namespace: argocd
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: PathPrefix(`/`)
+      services:
+        - name: argocd-server
+          port: 443
+    - kind: Rule
+      match: PathPrefix(`/`) && Header(`Content-Type`, `application/grpc`)
+      services:
+        - name: argocd-server
+          port: 443
+          scheme: h2c
+  tls:
+    certResolver: default
