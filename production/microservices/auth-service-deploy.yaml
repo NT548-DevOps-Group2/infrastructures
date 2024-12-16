@@ -9,8 +9,8 @@ spec:
   type: ClusterIP
   ports:
     - protocol: TCP
-      port: 8003
-      targetPort: 8003
+      port: 8001
+      targetPort: 8001
 
 ---
 
@@ -31,10 +31,10 @@ spec:
     spec:
       containers:
       - name: auth-microservice-c
-        image: tonyq2k3/auth-microservice:release
+        image: tonyq2k3/auth-microservice:2.0
         env:
           - name: PORT
-            value: "8003"
+            value: "8001"
           - name: MONGO_URI
             valueFrom:
               secretKeyRef:
@@ -45,4 +45,4 @@ spec:
             memory: 128Mi
             cpu: "0.25"
         ports:
-        - containerPort: 8003
+        - containerPort: 8001

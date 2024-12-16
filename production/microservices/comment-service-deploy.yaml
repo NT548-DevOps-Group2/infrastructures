@@ -9,8 +9,8 @@ spec:
   type: ClusterIP
   ports:
     - protocol: TCP
-      port: 8002
-      targetPort: 8002
+      port: 8003
+      targetPort: 8003
 
 ---
 
@@ -31,10 +31,10 @@ spec:
     spec:
       containers:
       - name: comment-microservice-c
-        image: tonyq2k3/comment-microservice:release
+        image: tonyq2k3/comment-microservice:2.0
         env:
           - name: PORT
-            value: "8002"
+            value: "8003"
           - name: MONGO_URI
             valueFrom:
               secretKeyRef:
@@ -45,4 +45,4 @@ spec:
             memory: 128Mi
             cpu: "0.25"
         ports:
-        - containerPort: 8002
+        - containerPort: 8003
