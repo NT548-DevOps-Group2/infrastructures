@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: frontend-c
-        image: tonyq2k3/mern-stack-frontend:release-37309974cd93993f654d3258c34b0d0da40ef6a6
+        image: tonyq2k3/mern-stack-frontend:prod-626ad7bfd7917c1e760906057f878bb7fe689df2
         env:
           - name: REACT_APP_API
             valueFrom:
