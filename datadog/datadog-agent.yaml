@@ -5,7 +5,7 @@ metadata:
 spec:
   global:
     clusterName: production-environment
-    site: us5.datadoghq.com
+    site: datadoghq.com
     credentials:
       apiSecret:
         secretName: datadog-secret
@@ -17,3 +17,5 @@ spec:
     logCollection:
       enabled: true
       containerCollectAll: true
+    npm:
+      enabled: true
