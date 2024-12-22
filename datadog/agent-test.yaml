@@ -1,0 +1,21 @@
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: test-environment
+    site: datadoghq.com
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+
+  features:
+    eventCollection:
+      collectKubernetesEvents: true
+    logCollection:
+      enabled: true
+      containerCollectAll: true
+    npm:
+      enabled: true
